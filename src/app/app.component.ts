@@ -77,23 +77,14 @@ ngOnInit() {
     return this.totalAccounts === this.accounts.length;
   }
 
-  public sortData(event){
-    this.currentEventColumn = event;
-    let target = event.currentTarget,
-      classList = target.classList;
-      
-    if (classList.contains('fa-chevron-up')) {
-      classList.remove('fa-chevron-up');
-      classList.add('fa-chevron-down');
-
-    this.sortDirection = 'asc'; 
-    } else {
-      classList.add('fa-chevron-up');
-      classList.remove('fa-chevron-down');
-
-    this.sortDirection = 'desc'; 
+  public sortData(sortCol){
+    if(sortCol === this.sortColumn){
+      this.sortDirection = (this.sortDirection && this.sortDirection === 'asc') ? 'desc' : 'asc';
     }
-
+    else{
+      this.sortColumn = sortCol;
+      this.sortDirection = 'asc';
+    }
 
     this.loadAccounts(this.size, this.moreLoaded, this.sortColumn, this.sortDirection);
   }
