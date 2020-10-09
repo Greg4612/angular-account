@@ -1,0 +1,34 @@
+<table >
+  <thead>
+  <th id='account-header' >
+    <p (click)="sortColumn = 'account';sortData($event)">
+    Account
+    <i *ngIf="sortColumn === 'account'" (click)="sortData($event)" class="my-icon fa fa-chevron-up"></i>
+    </p>
+  </th>
+  <th id='cash-header' (click)="sortColumn = 'availableCash'; sortData($event)">
+    <p>Available Cash 
+    <i *ngIf="sortColumn === 'availableCash'" (click)="sortData($event)" class="my-icon fa fa-chevron-up"></i></p>
+    <p class="sub-title">Today's Change</p>
+    </th>
+    </thead>
+    <tbody>
+  <tr> 
+  <td colspan="2"> <hr /> </td>      
+</tr>
+  <tr *ngFor="let transfer of accounts">
+    <td id="account">{{ transfer.account }}</td>
+    <td id="cash-available">
+      <p id="cash">{{ convertCashValue(transfer.availableCash) }}</p>
+      <p id="change" [style.color]="colorConvert(transfer)">
+        <span *ngIf="transfer.isPositive && transfer.changePercentage > 0">+</span>
+        <span *ngIf="!transfer.isPositive && transfer.changePercentage > 0">-</span>
+        %{{ convertPercentage(transfer.changePercentage) }} / {{ convertCashValue(transfer.changeAmount) }}
+      </p>
+      </td>
+  </tr>
+  <tr>
+    <td  colspan="2" id="loadMore" (click)="loadMore()" *ngIf="!checkAccountTotal()">Load more</td>
+  </tr>
+    </tbody>
+</table>
