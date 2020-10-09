@@ -1,14 +1,17 @@
 <table >
   <thead>
   <th id='account-header' >
-    <p (click)="sortColumn = 'account';sortData($event)">
+    <p (click)="sortData('account')">
     Account
-    <i *ngIf="sortColumn === 'account'" (click)="sortData($event)" class="my-icon fa fa-chevron-up"></i>
+    <i *ngIf="sortColumn === 'account' && sortDirection === 'asc'"  class="my-icon fa fa-chevron-up"></i>
+    <i *ngIf="sortColumn === 'account' && sortDirection === 'desc'" class="my-icon fa fa-chevron-down"></i>
     </p>
   </th>
-  <th id='cash-header' (click)="sortColumn = 'availableCash'; sortData($event)">
+  <th id='cash-header' (click)="sortData('availableCash')">
     <p>Available Cash 
-    <i *ngIf="sortColumn === 'availableCash'" (click)="sortData($event)" class="my-icon fa fa-chevron-up"></i></p>
+    <i *ngIf="sortColumn === 'availableCash' && sortDirection === 'asc'" class="my-icon fa fa-chevron-up"></i>
+    <i *ngIf="sortColumn === 'availableCash' && sortDirection === 'desc'"class="my-icon fa fa-chevron-down"></i>
+    </p>
     <p class="sub-title">Today's Change</p>
     </th>
     </thead>
